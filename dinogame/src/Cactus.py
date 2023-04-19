@@ -13,16 +13,26 @@ class Cactus:
         self.height = random.randint(self.min_height, self.max_height)
         self.x = self.game.game_width
         self.y = self.game.game_height - (self.game.floor_height + self.height)
-        
+        self.collisionX = self.x
+        self.collisionY = self.y
     
+
+    def reset_state (self):
+        self.color = self.colors[random.randint(0, len(self.colors) - 1)]
+        self.height = random.randint(self.min_height, self.max_height)
+        self.y = self.game.game_height - (self.game.floor_height + self.height)
+        self.x = self.game.game_width
+        self.game.score = self.game.score + 1
+        self.collisionX = self.x
+        self.collisionY = self.y
+
     def draw (self):
         rect = pygame.Rect(self.x, self.y , self.width, self.height)
         pygame.draw.rect(self.game.screen, self.color, rect)
 
     def update (self):
         self.x -= self.game.speed
-        if (self.x + self.width < 0): 
-            self.color = self.colors[random.randint(0, len(self.colors) - 1)]
-            self.height = random.randint(self.min_height, self.max_height)
-            self.y = self.game.game_height - (self.game.floor_height + self.height)
-            self.x = self.game.game_width
+        if (self.x + self.width < 0): self.reset_state()
+        #check collision with dino
+        if (self.game.check_collision(self, self.game.dino)):
+            print("collision!")

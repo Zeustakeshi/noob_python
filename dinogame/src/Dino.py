@@ -7,6 +7,8 @@ class Dino :
         self.height = 100
         self.x = 50
         self.y = self.game.game_height - (self.game.floor_height + self.height)
+        self.collisionX = self.x
+        self.collisionY = self.y
         self.color = "skyblue"
         #suc nhay cua dino
         self.jump_force = 250
