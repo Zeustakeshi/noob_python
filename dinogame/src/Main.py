@@ -7,39 +7,42 @@ class Game:
         pygame.init()
         self.game_width = 600
         self.game_height = 800
-
+        self.game_exit = False
         self.screen = pygame.display.set_mode((self.game_width, self.game_height))
-        self.gravity = 0.25
-        self.game_avt = True
+        self.gravity =4
+        self.game_active = True
         self.score = 0
         self.high_score = 0
         self.dino_movement = 0
 
-        # Game obj
+        # Game object
         self.floor = Floor(self)
         self.dino = Dino(self) 
 
-        #draw game obj
-        self.draw()
-        pygame.display.flip()
-        done = False
-        while not done:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    done = True
+        # Game loop
+        while not self.game_exit:
+            self.event_listener()
             self.update()
-            self.draw()
-            pygame.display.update()
+            #pygame.display.update() = pygame.display.flip() (hai ham nay giong nhau)
+            pygame.display.flip()
         pygame.quit()
         sys.exit()
 
+    def event_listener (self):
+        for event in pygame.event.get():
+            #When click close button
+            if event.type == pygame.QUIT:
+                self.game_exit = True
+
     def draw (self):
-        self.dino.draw()
+        # Clear screen 
+        self.screen.fill((255, 255, 255))
         self.floor.draw()
+        self.dino.draw()
     
     def update (self):
-        self.dino.y -= 11
-        # self.dino.update()
+        self.dino.update()
+        self.draw()
 
 
 
