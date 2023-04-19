@@ -3,7 +3,7 @@ class Floor:
     def __init__ (self, game ) :
         self.game = game
         self.width = self.game.game_width
-        self.height = 200
+        self.height = self.game.floor_height
         self.x = 0
         self.y = self.game.game_height - self.height
         self.color = "tomato"
