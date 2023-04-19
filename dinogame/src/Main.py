@@ -64,5 +64,5 @@ class Game:
 
 
 
-game = Game()
+
 
