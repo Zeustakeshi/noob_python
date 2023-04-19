@@ -3,13 +3,24 @@ import pygame
 class Dino :
     def __init__ (self, game):
         self.game = game
-        self.width = 100
-        self.height = 100
+        self.sprire_width = 803
+        self.sprire_height = 1330
+        self.scale = 0.12
+        self.width = self.sprire_width * self.scale
+        self.height = self.sprire_height * self.scale
+        
+
         self.x = 50
         self.y = self.game.game_height - (self.game.floor_height + self.height)
         self.collisionX = self.x
         self.collisionY = self.y
         self.color = "skyblue"
+
+        # xu li anh
+        self.image = pygame.image.load("./assets/toad_antennae.png")
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+        self.image = pygame.transform.flip(self.image, True, False)
+
         #suc nhay cua dino
         self.jump_force = 250
         self.is_on_ground = True
@@ -23,8 +34,7 @@ class Dino :
                 self.is_on_ground = False
 
     def draw (self): 
-        rect = pygame.Rect(self.x, self.y , self.width, self.height)
-        pygame.draw.rect(self.game.screen, self.color, rect)
+        self.game.screen.blit(self.image, (self.x, self.y))
 
     def update (self):
         ground = self.game.game_height - (self.game.floor_height + self.height)

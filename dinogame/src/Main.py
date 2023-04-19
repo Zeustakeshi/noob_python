@@ -80,37 +80,11 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.draw_game_status()
         #draw object
-        self.floor.draw()
-        self.dino.draw()
         for obstacle in self.obstacles: obstacle.draw()
+        self.dino.draw()
+        self.floor.draw()
     
     def update (self):
         self.dino.update()
         for obstacle in self.obstacles: obstacle.update()
         self.draw()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
