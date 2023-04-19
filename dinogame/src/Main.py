@@ -7,9 +7,9 @@ class Game:
         pygame.init()
         self.game_width = 600
         self.game_height = 800
-        self.game_exit = False
         self.screen = pygame.display.set_mode((self.game_width, self.game_height))
-        self.gravity =4
+        self.game_exit = False
+        self.gravity = 1
         self.game_active = True
         self.score = 0
         self.high_score = 0
@@ -33,6 +33,7 @@ class Game:
             #When click close button
             if event.type == pygame.QUIT:
                 self.game_exit = True
+            self.dino.event_listener(event)
 
     def draw (self):
         # Clear screen 
